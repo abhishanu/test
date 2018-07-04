@@ -58,8 +58,8 @@ public class TempleConnectivity {
 		return nearestAirport;
 	}
 
-	public void setNearestAirport(String neareshAirport) {
-		this.nearestAirport = neareshAirport;
+	public void setNearestAirport(String nearestAirport) {
+		this.nearestAirport = nearestAirport;
 	}
 
 	public String getIsActive() {

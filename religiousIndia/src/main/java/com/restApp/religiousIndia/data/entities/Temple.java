@@ -9,6 +9,7 @@ import javax.persistence.Table;
 @Table(name = "RI_TEMPLE")
 public class Temple {
 	@Id
+	@Column(name = "temple_id")
 	private String templeId;
 
 	private String templeName;
@@ -16,13 +17,24 @@ public class Temple {
 	private String authChannelPartner;
 	private String isActive;
 
-	@Column(name="MAIN_IMAGE_ID")
+	@Column(name = "MAIN_IMAGE_ID")
 	private String mainImageID;
 
 	private String contactNo;
-	
+
 	@Column(name = "TEMPLE_ADDRESS_ID")
 	private String templeAddressId;
+
+	@Column(columnDefinition = "TEXT", name = "Image_Gallery", nullable = true)
+	private String imageGallery;
+
+	public String getTempleAddressId() {
+		return templeAddressId;
+	}
+
+	public void setTempleAddressId(String templeAddressId) {
+		this.templeAddressId = templeAddressId;
+	}
 
 	public String getTempleId() {
 		return templeId;
@@ -87,4 +99,11 @@ public class Temple {
 				+ mainImageID + ", contactNo=" + contactNo + "]";
 	}
 
+	public String getImageGallery() {
+		return imageGallery;
+	}
+
+	public void setImageGallery(String imageGallery) {
+		this.imageGallery = imageGallery;
+	}
 }

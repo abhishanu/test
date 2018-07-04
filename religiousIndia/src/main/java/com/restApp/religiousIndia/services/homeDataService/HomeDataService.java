@@ -22,58 +22,69 @@ import com.restApp.religiousIndia.services.imageServices.RetriveImageService;
 public class HomeDataService {
 	@Autowired
 	ThoughtRepositry thoughtRepositry;
-	
+
 	@Autowired
 	MainMenuRepositry mainMenuRepositry;
-	
+
 	@Autowired
 	HomeBannerRepositry homeBannerRepositry;
-	
+
 	@Autowired
 	RetriveImageService retriveImageService;
-	
+
 	@Autowired
 	TempleRepositry templeRepositry;
-	
+
 	@Autowired
 	ImagesRepositry dummyRepositry;
-	
-	public Iterable<FamousThoughts> getAllThoughts(){
-		return thoughtRepositry.findAll();
+
+	public Iterable<FamousThoughts> getAllThoughts() {
+		try {
+			return thoughtRepositry.findAll();
+		} catch (Exception e) {
+			return null;
+		}
 	}
-	
+
 	public List<MainMenuItem> getHomeMenuActiveTab() {
-		return mainMenuRepositry.findByisActiveEquals("1");
-	} 
-	
+		try {
+			return mainMenuRepositry.findByisActiveEquals("1");
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
 	public List<Map<String, String>> getBannerDetails() {
-		Map<String, String> allBannersDetails = new HashMap<String, String>();
-		List<Map<String, String>> listofBanners=new ArrayList<Map<String, String>>();
-		List<HomeBanner> allBanners = homeBannerRepositry.findByisActiveEquals("1");
-		for (HomeBanner homeBanner : allBanners) {
-				String imageId=homeBanner.getImageId();
+		try {
+			Map<String, String> allBannersDetails = new HashMap<String, String>();
+			List<Map<String, String>> listofBanners = new ArrayList<Map<String, String>>();
+			List<HomeBanner> allBanners = homeBannerRepositry.findByisActiveEquals("1");
+			for (HomeBanner homeBanner : allBanners) {
+				String imageId = homeBanner.getImageId();
 				allBannersDetails.put("IMAGE_ID", imageId);
 				allBannersDetails.put("IMAGE_NAME", homeBanner.getBannerName());
 				allBannersDetails.put("ITEM_ID", homeBanner.getItemId());
 				allBannersDetails.put("SUB_ITEM_ID", homeBanner.getSubItemId());
 				allBannersDetails.put("DATA_ID", homeBanner.getDataId());
 
-				/*String base64 = retriveImageService.imageToBase64_2(imageId);
-				allBannersDetails.put("ImageBase64", base64);*/
 				listofBanners.add(allBannersDetails);
-			
+			}
+			return listofBanners;
+		} catch (Exception e) {
+			return null;
 		}
-		return listofBanners;
 	}
-	
+
 	public List<Map<String, String>> getHomeBannerDetails() {
-		
-		List<Map<String, String>> listofBanners=new ArrayList<Map<String, String>>();
-		
-		List<HomeBanner> allBanners = homeBannerRepositry.findByisActiveEquals("1");
-		for (HomeBanner homeBanner : allBanners) {
+		try {
+
+			List<Map<String, String>> listofBanners = new ArrayList<Map<String, String>>();
+
+			List<HomeBanner> allBanners = homeBannerRepositry.findByisActiveEquals("1");
+			for (HomeBanner homeBanner : allBanners) {
 				Map<String, String> bannersDetails = new HashMap<String, String>();
-				String imageId=homeBanner.getImageId();
+				String imageId = homeBanner.getImageId();
 				bannersDetails.put("IMAGE_ID", imageId);
 				bannersDetails.put("BANNER_NAME", homeBanner.getBannerName());
 				bannersDetails.put("ITEM_ID", homeBanner.getItemId());
@@ -81,10 +92,14 @@ public class HomeDataService {
 				bannersDetails.put("DATA_ID", homeBanner.getDataId());
 				bannersDetails.put("BANNER_DESC", homeBanner.getBannerDesc());
 				String imagePath = retriveImageService.getImagePath(imageId);
-				bannersDetails.put("Image_Path",imagePath );
+				bannersDetails.put("Image_Path", imagePath);
 				listofBanners.add(bannersDetails);
-			
+
+			}
+			return listofBanners;
+
+		} catch (Exception e) {
+			return null;
 		}
-		return listofBanners;		
 	}
 }

@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Address {
 	@Id
 	@Column(name = "ADDRESS_ID")
-	private String id;
+	private String addressID;
 
 	private String state;
 
@@ -18,19 +18,23 @@ public class Address {
 
 	private String city;
 
-	private String addressDetails;
+	@Column(name = "ADDRESS_DETAIL")
+	private String addressDetail;
 
 	@Column(name = "IS_TEMPLE_ADDRESS")
 	private String isTempleAddress;
 
 	private String isActive;
+	
+	@Column(name="City_Id")
+	private String cityId;
 
 	public String getId() {
-		return id;
+		return addressID;
 	}
 
 	public void setId(String id) {
-		this.id = id;
+		this.addressID = id;
 	}
 
 	public String getState() {
@@ -57,12 +61,12 @@ public class Address {
 		this.city = city;
 	}
 
-	public String getAddressDetails() {
-		return addressDetails;
+	public String getAddressDetail() {
+		return addressDetail;
 	}
 
-	public void setAddressDetails(String addressDetails) {
-		this.addressDetails = addressDetails;
+	public void setAddressDetail(String addressDetail) {
+		this.addressDetail = addressDetail;
 	}
 
 	public String getIsTempleAddress() {
@@ -79,6 +83,14 @@ public class Address {
 
 	public void setIsActive(String isActive) {
 		this.isActive = isActive;
+	}
+
+	public String getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
 	}
 
 }
